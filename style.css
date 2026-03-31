@@ -1,0 +1,83 @@
+:root {
+  --bg: #f5f9f4;
+  --card: #ffffff;
+  --text: #1f2a1f;
+  --muted: #4e6150;
+  --brand: #2c7a3f;
+  --brand-hover: #225f31;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #e7f3e4 0%, var(--bg) 45%, #eef5ee 100%);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+}
+
+.hero-image {
+  width: min(90vw, 420px);
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+p {
+  color: var(--muted);
+}
+
+.content {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.card {
+  width: min(92vw, 680px);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 26px rgba(31, 42, 31, 0.1);
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 0.6rem;
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.72rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.cta:hover {
+  background: var(--brand-hover);
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+}

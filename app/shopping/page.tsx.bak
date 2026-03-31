@@ -1,0 +1,293 @@
+'use client';
+
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCart } from '../contexts/CartContext';
+import { X } from 'lucide-react';
+
+interface Product {
+  id: string | number;
+  name: string;
+  price: number;
+  image: string;
+  description?: string;
+  seller?: string;
+}
+
+const DEFAULT_PRODUCTS: Product[] = [
+  {
+    id: 1,
+    name: 'Organic Ragi Flour',
+    price: 60,
+    image: 'https://images.unsplash.com/photo-1586201375761-83865001e31d?auto=format&fit=crop&w=900&q=80',
+    description: 'High quality organic ragi flour',
+    seller: 'Farm Direct',
+  },
+  {
+    id: 2,
+    name: 'Fresh Cow Ghee',
+    price: 850,
+    image: 'https://images.unsplash.com/photo-1596522868827-678785f7cd45?auto=format&fit=crop&w=900&q=80',
+    description: 'Pure cow ghee from organic farms',
+    seller: 'Dairy Hub',
+  },
+  {
+    id: 3,
+    name: 'Alphonso Mangoes',
+    price: 1200,
+    image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80',
+    description: 'Fresh Alphonso mangoes from Ratnagiri',
+    seller: 'Mango Estates',
+  },
+  {
+    id: 4,
+    name: 'Pure Wild Honey',
+    price: 450,
+    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80',
+    description: 'Raw unfiltered honey from wild bees',
+    seller: 'Honey Farm',
+  },
+  {
+    id: 5,
+    name: 'Cold Pressed Coconut Oil',
+    price: 320,
+    image: 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=900&q=80',
+    description: 'Virgin cold pressed coconut oil',
+    seller: 'Coconut Co',
+  },
+  {
+    id: 6,
+    name: 'Fresh Tomatoes',
+    price: 40,
+    image: 'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80',
+    description: 'Farm fresh tomatoes daily',
+    seller: 'Vegetable Farm',
+  },
+];
+
+const STORAGE_KEY = 'farmer_products';
+
+export default function ShoppingPage() {
+  const router = useRouter();
+  const { addToCart, itemCount } = useCart();
+  const [role, setRole] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    description: '',
+    image: '',
+  });
+
+  useEffect(() => {
+    const userRole = localStorage.getItem('role') || '';
+    const userName = localStorage.getItem('username') || '';
+    
+    if (!userRole) {
+      router.push('/login');
+      return;
+    }
+
+    setRole(userRole);
+    setUsername(userName);
+
+    const loadProducts = () => {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      const customProducts = stored ? JSON.parse(stored) : [];
+      setProducts([...DEFAULT_PRODUCTS, ...customProducts]);
+    };
+
+    loadProducts();
+  }, [router]);
+
+  const onAddToCart = (product: Product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      unit: 'item',
+      image_url: product.image,
+      farmer_name: product.seller || 'Local Farmer',
+    });
+  };
+
+  const handleAddProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name.trim() || !formData.price || !formData.image.trim()) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    const newProduct: Product = {
+      id: `custom_${Date.now()}`,
+      name: formData.name.trim(),
+      price: parseFloat(formData.price),
+      image: formData.image.trim(),
+      description: formData.description.trim() || 'Farm fresh product',
+      seller: username,
+    };
+
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const customProducts = stored ? JSON.parse(stored) : [];
+    customProducts.push(newProduct);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(customProducts));
+
+    setProducts([...products, newProduct]);
+
+    setFormData({
+      name: '',
+      price: '',
+      description: '',
+      image: '',
+    });
+    setShowAddForm(false);
+
+    alert('Product added successfully!');
+  };
+
+  const isFarmer = role === 'Farmer';
+
+  return (
+    <main className="min-h-screen bg-gray-50 px-4 py-6">
+      <div className="mx-auto w-full max-w-6xl">
+        <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-semibold text-gray-900">Shopping</h1>
+            {isFarmer && (
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="rounded-full bg-green-600 h-10 w-10 flex items-center justify-center text-white font-bold text-lg hover:bg-green-700 transition"
+                title="Add Product"
+              >
+                +
+              </button>
+            )}
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="rounded-md bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm">
+              Cart: {itemCount}
+            </span>
+            <Link
+              href="/checkout"
+              className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
+            >
+              Checkout
+            </Link>
+          </div>
+        </header>
+
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <article key={product.id} className="overflow-hidden rounded-lg bg-white shadow-sm hover:shadow-md transition">
+              <img src={product.image} alt={product.name} className="h-44 w-full object-cover" />
+              <div className="p-4">
+                <h2 className="text-base font-medium text-gray-900">{product.name}</h2>
+                <p className="mt-1 text-sm text-gray-600">{product.description}</p>
+                <p className="mt-1 text-xs text-gray-500">Seller: {product.seller}</p>
+                <p className="mt-2 text-lg font-semibold text-green-700">Rs. {product.price}</p>
+                <button
+                  onClick={() => onAddToCart(product)}
+                  className="mt-3 w-full rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700 transition"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+      </div>
+
+      {showAddForm && isFarmer && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-gray-900">Add New Product</h2>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddProduct} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Product Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="e.g., Fresh Tomatoes"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Price (Rs.)
+                </label>
+                <input
+                  type="number"
+                  value={formData.price}
+                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                  placeholder="e.g., 100"
+                  min="1"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description
+                </label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  placeholder="e.g., Fresh farm tomatoes from..."
+                  rows={3}
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  placeholder="https://example.com/image.jpg"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-green-600"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition"
+                >
+                  Add Product
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowAddForm(false)}
+                  className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}

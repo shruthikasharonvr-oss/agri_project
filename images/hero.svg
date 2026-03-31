@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-labelledby="title desc">
+  <title id="title">Farm Landscape</title>
+  <desc id="desc">Simple farm hills, sun, and field rows.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dff4ff" />
+      <stop offset="100%" stop-color="#f6fbff" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#sky)" />
+  <circle cx="640" cy="90" r="45" fill="#ffd866" />
+  <path d="M0 260 C150 200, 270 210, 420 250 C560 285, 680 265, 800 230 L800 420 L0 420 Z" fill="#94d18e" />
+  <path d="M0 305 C170 245, 330 260, 500 300 C620 327, 710 320, 800 296 L800 420 L0 420 Z" fill="#6fb76a" />
+  <g stroke="#4f8f4a" stroke-width="4" fill="none" opacity="0.65">
+    <path d="M60 360 C170 320, 290 320, 410 350" />
+    <path d="M130 390 C260 345, 380 350, 530 388" />
+    <path d="M260 410 C380 372, 520 372, 690 410" />
+  </g>
+</svg>
