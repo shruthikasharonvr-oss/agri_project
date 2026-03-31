@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 {
   "framework": "nextjs",
   "installCommand": "npm ci",
   "buildCommand": "npm run build"
+=======
+{
+  "framework": "nextjs",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build"
+>>>>>>> b2633f978fb333335f250d6d88fadd17a67c2a69
 }
