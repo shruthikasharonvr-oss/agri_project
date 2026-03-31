@@ -1,0 +1,9 @@
+app/adoptions/[id]/page.tsx(252,29): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+app/adoptions/[id]/page.tsx(294,29): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+app/adoptions/live-track/page.tsx(259,21): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+app/adoptions/live-track/page.tsx(301,21): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+app/checkout/page.tsx(30,24): error TS2349: This expression is not callable.
+  Type 'typeof import("E:/allserved backend/farm_to_home/node_modules/react-razorpay/dist/index")' has no call signatures.
+app/tracking/[id]/page.tsx(113,38): error TS2339: Property 'importLibrary' does not exist on type 'Loader'.
+app/tracking/[id]/page.tsx(182,25): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+app/tracking/[id]/page.tsx(192,26): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.

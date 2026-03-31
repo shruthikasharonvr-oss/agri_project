@@ -1,0 +1,139 @@
+{
+  ".env.local": 1623,
+  "account": {
+    "page.tsx": 11062
+  },
+  "add-product": {
+    "page.tsx": 14104
+  },
+  "adoptions": {
+    "add": {
+      "page.tsx": 12558
+    },
+    "live-track": {
+      "page.tsx": 21484
+    },
+    "page.tsx": 24339,
+    "pay": {
+      "[id]": {
+        "page.tsx": 15832
+      }
+    },
+    "[id]": {
+      "journal": {
+        "page.tsx": 20826
+      },
+      "page.tsx": 28705
+    }
+  },
+  "api": {
+    "assistant": {
+      "route.ts": 5428
+    },
+    "chat": {
+      "route.ts": 3072
+    },
+    "send-email": {
+      "route.ts": 6521
+    },
+    "translate": {
+      "route.ts": 4432
+    }
+  },
+  "assistant": {
+    "page.tsx": 16167
+  },
+  "auth": {
+    "callback": {
+      "route.ts": 2603
+    },
+    "page.tsx": 7152
+  },
+  "cart": {
+    "page.tsx": 6456
+  },
+  "chat": {
+    "page.tsx": 27356
+  },
+  "checkout": {
+    "page.tsx": 35555
+  },
+  "components": {
+    "AgriAssistant.tsx": 6582,
+    "LoginNagModal.tsx": 5180,
+    "Navbar.tsx": 17512,
+    "ProfileSync.tsx": 1689,
+    "WelcomeAnimation.tsx": 4467
+  },
+  "constants": {
+    "translations.ts": 3955
+  },
+  "contexts": {
+    "CartContext.tsx": 2583,
+    "TranslationContext.tsx": 1104
+  },
+  "experience": {
+    "certificate": {
+      "page.tsx": 7043
+    },
+    "harvest-game": {
+      "page.tsx": 9731
+    }
+  },
+  "farmer": {
+    "dashboard": {
+      "page.tsx": 12957
+    }
+  },
+  "favicon.ico": 25931,
+  "global.css": 259,
+  "globals.css": 4038,
+  "layout.tsx": 2064,
+  "lib": {
+    "firebase.ts": 959,
+    "logger.ts": 1535,
+    "supabase.ts": 328
+  },
+  "live-harvesting": {
+    "page.tsx": 13944
+  },
+  "login": {
+    "page.tsx": 13882
+  },
+  "market-place": {
+    "page.tsx": 22236
+  },
+  "page.tsx": 21395,
+  "privacy": {
+    "page.tsx": 8830
+  },
+  "product": {
+    "[id]": {
+      "page.tsx": 17795
+    }
+  },
+  "register": {
+    "page.tsx": 22439
+  },
+  "sell-product": {
+    "page.tsx": 6305
+  },
+  "terms": {
+    "page.tsx": 8237
+  },
+  "tracking": {
+    "page.tsx": 10720,
+    "[id]": {
+      "page.tsx": 19728
+    }
+  },
+  "translate-test": {
+    "page.tsx": 2008
+  },
+  "types": {
+    "model-viewer.d.ts": 687
+  },
+  "weather": {
+    "page.tsx": 15659
+  }
+}
