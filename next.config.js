@@ -1,14 +1,7 @@
 /** @type {import('next').NextConfig} */
-const path = require("path");
-
 const nextConfig = {
-	turbopack: {
-		root: path.resolve(__dirname),
-	},
-	output: 'export',
-	images: {
-		unoptimized: true,
-	},
-};
+  // Removing output: 'export' to fix the dynamic route error
+  reactStrictMode: true,
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
