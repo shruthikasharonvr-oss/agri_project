@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
+export const dynamic = 'force-static';
+
 // Seed data for marketplace
 const SEED_PRODUCTS = [
   {

@@ -4,6 +4,8 @@
 import { NextResponse } from 'next/server';
 import { v2 as GoogleTranslate } from '@google-cloud/translate';
 
+export const dynamic = 'force-static';
+
 // Initialize the Google Cloud Translation client with API key
 const translateClient = new GoogleTranslate.Translate({
   key: process.env.GOOGLE_CLOUD_API_KEY,

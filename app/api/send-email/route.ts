@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+export const dynamic = 'force-static';
+
 // Configure your SMTP credentials in .env.local
 // For Gmail, use an App Password if 2FA is enabled.
 const transporter = nodemailer.createTransport({

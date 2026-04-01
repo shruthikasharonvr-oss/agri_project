@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+export const dynamic = 'force-static';
+
 const GEMINI_KEY = process.env.GEMINI_API_KEY || 'AIzaSyDFpRJOiJArhJeQ9aiSGJ8Q7Y0VyM1rtX4';
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 

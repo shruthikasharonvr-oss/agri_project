@@ -3,6 +3,8 @@ import { generateOTP } from '../../../lib/otpService';
 import { storeOTPServer } from '../../../lib/otpServiceServer';
 import { sendOTPEmail } from '../../../lib/emailService';
 
+export const dynamic = 'force-static';
+
 export async function POST(request: NextRequest) {
   try {
     const { email, username, name } = await request.json();

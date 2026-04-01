@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { deleteOTPSession, getRemainingAttempts, verifyOTPServer, getOTPSession } from '../../../lib/otpServiceServer';
 
+export const dynamic = 'force-static';
+
 export async function POST(request: NextRequest) {
   try {
     const { email, otp } = await request.json();

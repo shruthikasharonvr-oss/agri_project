@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
 
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url)
